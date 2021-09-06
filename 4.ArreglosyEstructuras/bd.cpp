@@ -71,6 +71,7 @@ int main() {
 			{
 				calificar(lista);
 			}
+			break;
 			case 4:
 			{
 				listado(lista, mediaClase(lista), mayorNota(lista));
@@ -78,7 +79,7 @@ int main() {
 			}
 
 		} while (op != 0);
-		//guardar(lista);
+		guardar(lista);
 	}
 	return 0;
 }
@@ -100,6 +101,7 @@ int menu() {
 void cargar(tLista& lista, bool& ok) {
 	tEstudiante estudiante;
 	ifstream archivo;
+	char aux;
 
 	lista.contador = 0;
 	archivo.open("clase.txt");
@@ -114,7 +116,7 @@ void cargar(tLista& lista, bool& ok) {
 			archivo >> estudiante.edad;
 			archivo >> estudiante.cedula;
 			archivo >> estudiante.nota;
-			//aux
+			archivo.get(aux);
 			lista.elementos[lista.contador] = estudiante;
 			lista.contador++;
 			getline(archivo, estudiante.nombre); //siguiente nombre
@@ -138,7 +140,7 @@ void guardar(const tLista lista) {
 }
 
 void leerEstudiante(tEstudiante& estudiante) {
-	cin.sync();
+	cin.ignore(80, '\n');
 	cout << "Nombre: ";
 	getline(cin, estudiante.nombre);
 	cout << "Apellidos: ";
